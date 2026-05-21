@@ -123,7 +123,11 @@ SELECT
     DATEADD(day, -(n.n % 365), GETDATE()),
     CASE 
         WHEN n.n % 4 = 0 
-        THEN DATEADD(day, -(n.n % 300), GETDATE()) 
+        THEN DATEADD(
+            day,
+            (n.n % 30),
+            DATEADD(day, -(n.n % 365), GETDATE())
+        ) 
         ELSE NULL 
     END,
     e.Id_Employee,
